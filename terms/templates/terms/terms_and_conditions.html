@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Privacy Policy - Land Information & Management System</title>
+
+  <!-- Modern Font Stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1b4332;
+      --primary-accent: #2d6a4f;
+      --highlight-bg: #e8f5e9;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      margin: 0;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px 40px 16px;
+    }
+
+    .header-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--highlight-bg);
+      color: var(--primary-accent);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .content-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    h2:first-of-type {
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--primary-accent);
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p,
+    li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* High Visibility Alert Box for Play Store / App Store Audits */
+    .callout-box {
+      background-color: #f0fdf4;
+      border-left: 4px solid var(--primary-accent);
+      padding: 16px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+
+    .callout-box h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .toc-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .toc ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    .toc li {
+      margin-bottom: 4px;
+    }
+
+    .toc a {
+      color: var(--primary-accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .contact-box {
+      background: var(--primary-color);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .contact-box h3 {
+      color: #ffffff;
+      margin-top: 0;
+    }
+
+    .contact-box a {
+      color: #a7f3d0;
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 480px) {
+      .wrapper {
+        padding: 12px 10px 30px 10px;
+      }
+
+      .content-card {
+        padding: 20px 16px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <!-- Header Card -->
+    <div class="header-card">
+      <span class="badge">Official Policy</span>
+      <h1>Privacy Policy</h1>
+      <p class="subtitle">Land Information & Management System (LIMS)</p>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="content-card">
+
+      <!-- Table of Contents for quick mobile navigation -->
+      <div class="toc">
+        <div class="toc-title">Quick Navigation</div>
+        <ul>
+          <li><a href="#intro">Introduction</a></li>
+          <li><a href="#legal-age">1. Legal Age Requirement</a></li>
+          <li><a href="#sms-policy">2. SMS & Verification Permissions</a></li>
+          <li><a href="#data-collected">3. Information We Collect</a></li>
+          <li><a href="#data-usage">4. How We Use Information</a></li>
+          <li><a href="#security">5. Security Procedures</a></li>
+          <li><a href="#contact">6. Contact Information</a></li>
+        </ul>
+      </div>
+
+      <!-- Introduction -->
+      <section id="intro">
+        <h2>Introduction</h2>
+        <p>
+          Land Information & Management System (LIMS) ("the Company," "we," "our" or "us") respects your privacy and is
+          committed to protecting it through our compliance with this policy. We will never share your personally
+          identifiable information with third parties without your consent.
+        </p>
+        <p>This policy describes the types of information we may collect from you or that you may provide when you:</p>
+        <ul>
+          <li>Visit, access, or use our mobile applications ("apps") running on smartphones, tablets, and other devices;
+          </li>
+          <li>Communicate with us electronically and through other channels;</li>
+          <li>View or click on our ads or online content; and</li>
+          <li>Interact with us through social media platforms and associated services.</li>
+        </ul>
+        <p>
+          Please read this policy carefully. If you do not agree with our policies and practices, choose not to use our
+          application. By accessing or using our app, you agree to this Privacy Policy.
+        </p>
+      </section>
+
+      <!-- Legal Age -->
+      <section id="legal-age">
+        <h2>1. Legal Age</h2>
+        <p>
+          No one under the age of 18 may provide any personal information to or on our app without verified legal
+          parental or guardian consent. We do not knowingly collect personal information from persons under 18. If we
+          learn that we have received personal information from a minor without verification of parental consent, we
+          will delete that information immediately. If you believe we might have any information regarding a minor
+          without proper consent, please contact us at <a
+            href="mailto:ceolimspakistan@gmail.com">ceolimspakistan@gmail.com</a>.
+        </p>
+      </section>
+
+      <!-- SMS Policy Callout Box -->
+      <section id="sms-policy">
+        <div class="callout-box">
+          <h3>SMS Access & OTP Permissions Notice</h3>
+          <p><strong>Read SMS & Receive SMS Disclosure:</strong></p>
+          <p>
+            Our app requests explicit permission to read and receive SMS messages strictly to automatically detect and
+            retrieve One-Time Passwords (OTP) sent by our system for user account registration, multi-factor login, and
+            identity verification.
+          </p>
+          <ul>
+            <li><strong>Scope:</strong> Access is limited exclusively to OTP auto-fill and security alerts sent by LIMS.
+            </li>
+            <li><strong>Privacy:</strong> We do NOT read, store, transmit, or process unrelated personal SMS messages
+              from your inbox.</li>
+            <li><strong>Data Retention:</strong> OTP data is processed temporarily in-memory and discarded instantly
+              following successful authentication.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Information Collected -->
+      <section id="data-collected">
+        <h2>Information We Collect</h2>
+        <p>Depending on how you interact with our services, we collect several types of data:</p>
+
+        <h3>A. Account & Profile Data</h3>
+        <ul>
+          <li><strong>Contact Details:</strong> Full name, mailing address, telephone number, email address, and unique
+            account identifiers.</li>
+          <li><strong>Financial & Payment History:</strong> Purchase history and service subscriptions. <i>Note: We do
+              not store raw credit/debit card numbers or mobile money (MoMo) financial credentials on our
+              infrastructure.</i></li>
+          <li><strong>Profile Metrics:</strong> Date of birth, gender, profession, agricultural income range, marital
+            status, and optional social media profile identifiers (e.g., Facebook login avatar).</li>
+          <li><strong>User Contributions:</strong> Publicly shared media, discussion forum posts, and audio notes.</li>
+        </ul>
+
+        <h3>B. Device and System Telemetry</h3>
+        <ul>
+          <li><strong>Hardware Specs:</strong> Device make and model, operating system version, software build
+            identifiers, and unique device hardware IDs.</li>
+          <li><strong>Location Data:</strong> Real-time precise geographic position obtained via GPS, cellular tower
+            signals, Wi-Fi, or Bluetooth (subject to device permissions).</li>
+          <li><strong>Network Metrics:</strong> Mobile carrier name, IP address, connection speed, browser engine type,
+            language, and system time zone.</li>
+        </ul>
+      </section>
+
+      <!-- How We Use Data -->
+      <section id="data-usage">
+        <h2>How We Use Your Information</h2>
+        <p>We process collected information to:</p>
+        <ul>
+          <li>Deliver and optimize core agricultural advisory services, satellite map rendering, and report generation.
+          </li>
+          <li>Process transactions, billing, and subscription management.</li>
+          <li>Authenticate user identity, protect against fraudulent access, and enforce system security.</li>
+          <li>Analyze system load, optimize server infrastructure, and speed up search queries.</li>
+          <li>Personalize app content based on your region, crop selections, and historical usage patterns.</li>
+        </ul>
+      </section>
+
+      <!-- Cookies & Trackers -->
+      <section id="trackers">
+        <h2>Automated Tracking & Third-Party Integration</h2>
+        <p>
+          We utilize standard tracking tools including application cookies, pixel web beacons, and server log files to
+          evaluate feature utilization and preserve session integrity.
+        </p>
+        <p>
+          Certain third-party service providers (such as analytical tools or embedded components) may collect anonymous
+          device telemetry over time. We do not control third-party tracking mechanisms directly; you can manage cookie
+          consent and location access directly inside your device's native OS privacy settings.
+        </p>
+      </section>
+
+      <!-- Security -->
+      <section id="security">
+        <h2>2. Security Procedures</h2>
+        <p>
+          You are responsible for maintaining the confidentiality of your authentication credentials. Do not disclose
+          your security PINs, passwords, or device access to unauthorized third parties.
+        </p>
+        <p>
+          While we employ enterprise-grade encryption protocols and security best practices to protect your personal
+          information, no internet transmission or electronic database storage is completely immune to breach. Absolute
+          security cannot be guaranteed.
+        </p>
+      </section>
+
+      <!-- App Availability -->
+      <section id="availability">
+        <h2>3. Availability of App</h2>
+        <p>
+          The application is provided on an "AS IS" and "AS AVAILABLE" basis. LIMS reserves the right to suspend or
+          update services for system maintenance, infrastructure updates, or unexpected network carrier outages without
+          prior liability.
+        </p>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <div class="contact-box">
+          <h3>Questions & Compliance Support</h3>
+          <p>If you have questions regarding this Privacy Policy or wish to exercise your data protection rights,
+            contact our legal compliance officer at:</p>
+          <p><a href="mailto:ceolimspakistan@gmail.com">ceolimspakistan@gmail.com</a></p>
+        </div>
+      </section>
+
+      <div class="footer-copy">
+        <p>Land Information & Management System (LIMS)<br>&copy; All Rights Reserved.</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

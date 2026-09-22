@@ -1,0 +1,23 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content %}
+<div style="margin-bottom: 16px;">
+  <a href="{% url 'admin-export-db' %}" style="
+       display: inline-block;
+       padding: 10px 20px;
+       background: #1F7A33;
+       color: white;
+       font-weight: bold;
+       font-size: 14px;
+       border-radius: 6px;
+       text-decoration: none;
+     ">
+    ⬇ Export Full Database (Excel)
+  </a>
+  <span style="margin-left: 12px; color: #666; font-size: 13px;">
+    Downloads all tables as a single .xlsx file — one sheet per table.
+  </span>
+</div>
+{{ block.super }}
+{% endblock %}

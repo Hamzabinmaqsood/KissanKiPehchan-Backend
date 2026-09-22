@@ -1,0 +1,27 @@
+# Python
+venv/
+venv_linux/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+
+# Backups
+backups/*.dump
+backups/*.log
+
+# Environment
+.env
+*.dump
+
+# OS
+.DS_Store
+Thumbs.db

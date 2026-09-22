@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Community Usage Policy - Land Information &amp; Management System</title>
+
+  <!-- Modern Font Stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1b4332;
+      --primary-accent: #2d6a4f;
+      --highlight-bg: #e8f5e9;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      margin: 0;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px 40px 16px;
+    }
+
+    .header-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--highlight-bg);
+      color: var(--primary-accent);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .content-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    h2:first-of-type {
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--primary-accent);
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p,
+    li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* High Visibility Alert Box for Play Store / App Store Audits */
+    .callout-box {
+      background-color: #f0fdf4;
+      border-left: 4px solid var(--primary-accent);
+      padding: 16px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+
+    .callout-box h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .toc-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .toc ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    .toc li {
+      margin-bottom: 4px;
+    }
+
+    .toc a {
+      color: var(--primary-accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .contact-box {
+      background: var(--primary-color);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .contact-box h3 {
+      color: #ffffff;
+      margin-top: 0;
+    }
+
+    .contact-box a {
+      color: #a7f3d0;
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 480px) {
+      .wrapper {
+        padding: 12px 10px 30px 10px;
+      }
+
+      .content-card {
+        padding: 20px 16px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <!-- Header Card -->
+    <div class="header-card">
+      <span class="badge">Official Policy</span>
+      <h1>Community Usage Policy</h1>
+      <p class="subtitle">Land Information &amp; Management System (LIMS)</p>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="content-card">
+
+      <!-- Table of Contents for quick mobile navigation -->
+      <div class="toc">
+        <div class="toc-title">Quick Navigation</div>
+        <ul>
+          <li><a href="#intro">Introduction</a></li>
+          <li><a href="#conduct">1. Respectful Conduct</a></li>
+          <li><a href="#accuracy">2. Accuracy of Information</a></li>
+          <li><a href="#privacy-others">3. Privacy of Other Users</a></li>
+          <li><a href="#lawful-use">4. Lawful and Intended Use</a></li>
+          <li><a href="#zero-tolerance">5. Zero Tolerance &amp; Enforcement</a></li>
+          <li><a href="#contact">6. Contact Information</a></li>
+        </ul>
+      </div>
+
+      <!-- Introduction -->
+      <section id="intro">
+        <h2>Introduction</h2>
+        <p>
+          To maintain a safe, respectful, and reliable community, all users of the
+          Land Information &amp; Management System (LIMS) application must observe
+          the standards set out in this Community Usage Policy.
+        </p>
+        <p>
+          <strong>LIMS maintains a zero-tolerance policy for objectionable content
+          and abusive users.</strong>
+        </p>
+      </section>
+
+      <!-- 1. Respectful Conduct -->
+      <section id="conduct">
+        <h2>1. Respectful Conduct</h2>
+        <ul>
+          <li>
+            Use respectful and professional language at all times. Foul, abusive,
+            offensive, threatening, discriminatory, or inappropriate language or
+            content is strictly prohibited.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 2. Accuracy of Information -->
+      <section id="accuracy">
+        <h2>2. Accuracy of Information</h2>
+        <ul>
+          <li>
+            Ensure that all information, data, images, documents, uploads, and scans
+            submitted through the application are accurate, genuine, relevant, and,
+            to the best of the user's knowledge, complete.
+          </li>
+          <li>
+            Do not knowingly upload false, misleading, manipulated, fraudulent, or
+            unauthorized information.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 3. Privacy of Other Users -->
+      <section id="privacy-others">
+        <h2>3. Privacy of Other Users</h2>
+        <ul>
+          <li>
+            Respect the privacy and rights of other users and do not upload or share
+            another person's personal information without appropriate authorization.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 4. Lawful and Intended Use -->
+      <section id="lawful-use">
+        <h2>4. Lawful and Intended Use</h2>
+        <ul>
+          <li>
+            Use the application's features and community platforms only for their
+            intended and lawful purposes.
+          </li>
+          <li>
+            Do not misuse, disrupt, damage, attempt to gain unauthorized access to,
+            or interfere with the application's systems, services, or other users.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 5. Zero Tolerance & Enforcement -->
+      <section id="zero-tolerance">
+        <h2>5. Zero Tolerance &amp; Enforcement</h2>
+        <p>
+          <strong>LIMS has zero tolerance for objectionable content and abusive
+          users.</strong> Any content or behaviour that violates this policy may be
+          reported from within the application.
+        </p>
+        <p>
+          Reported content is reviewed within 24 hours. Content found to be in
+          violation of this policy is removed, and the user responsible is ejected
+          from the service where appropriate.
+        </p>
+        <p>
+          Users may also block any other user. Once blocked, that user's content is
+          removed from the blocking user's feed immediately.
+        </p>
+        <p>
+          LIMS reserves the right to review, remove, restrict, or take appropriate
+          action regarding any content, information, or user activity that violates
+          this Community Usage Policy, applicable laws, or other LIMS policies.
+        </p>
+        <p>
+          By using the application, you agree to comply with this Community Usage Policy.
+        </p>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <div class="contact-box">
+          <h3>Questions &amp; Compliance Support</h3>
+          <p>If you have questions regarding this Community Usage Policy or wish to
+            report a violation, contact our compliance team at:</p>
+          <p><a href="mailto:ceolimspakistan@gmail.com">ceolimspakistan@gmail.com</a></p>
+        </div>
+      </section>
+
+      <div class="footer-copy">
+        <p>Land Information &amp; Management System (LIMS)<br>&copy; All Rights Reserved.</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

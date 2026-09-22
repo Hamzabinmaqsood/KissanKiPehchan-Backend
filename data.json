@@ -1,0 +1,482 @@
+{
+  "brand": {
+    "productName": "AgriOne-OS",
+    "productSub": "(K2P)",
+    "companyA": "SYNTEC",
+    "companyB": "X",
+    "companyTag": "Simplifying Technology"
+  },
+  "header": {
+    "eyebrow": "AGRI ONE-OS (K2P) PROJECT",
+    "title": "LIVE PROJECT DASHBOARD",
+    "subtitle": "Together, we enable a Digital & Prosperous Agriculture Ecosystem",
+    "updatedLabel": "LAST UPDATED",
+    "updatedDate": "11 Aug 2026",
+    "updatedTime": "11:00 AM",
+    "pmLabel": "REPORTING PM",
+    "pmName": "Oumar Nawaz",
+    "pmRole": "Project & Commercial Manager"
+  },
+  "stats": [
+    {
+      "icon": "calendar",
+      "label": "PROJECT DURATION",
+      "value": "17 WEEKS",
+      "sub": "(15 Jul – 10 Nov 2026)",
+      "bind": "duration"
+    },
+    {
+      "icon": "calendar",
+      "label": "CURRENT WEEK",
+      "value": "WEEK 4",
+      "sub": "(5 – 11 Aug 2026)",
+      "bind": "currentWeek"
+    },
+    {
+      "icon": "pulse",
+      "label": "PROJECT HEALTH",
+      "value": "GOOD",
+      "sub": "On Track",
+      "health": true,
+      "bind": "health"
+    },
+    {
+      "icon": "target",
+      "label": "OVERALL PROGRESS",
+      "value": "32%",
+      "sub": "Completed",
+      "bind": "overall"
+    },
+    {
+      "icon": "calendar",
+      "label": "DAYS ELAPSED",
+      "value": "21 / 119",
+      "sub": "Days",
+      "bind": "daysElapsed"
+    },
+    {
+      "icon": "hourglass",
+      "label": "DAYS REMAINING",
+      "value": "98",
+      "sub": "Days",
+      "bind": "daysRemaining"
+    }
+  ],
+  "partsTitle": "5 PARTS PROGRESS & KPI SUMMARY",
+  "parts": [
+    {
+      "num": 1,
+      "name": "SOFTWARE<br>(APP & PORTAL)",
+      "icon": "code",
+      "progress": 62,
+      "status": "On Track",
+      "color": "#2E9E33",
+      "weight": 1,
+      "kpis": [
+        {
+          "l": "Modules Completed",
+          "v": "36 / 58"
+        },
+        {
+          "l": "Bugs Closed",
+          "v": "42"
+        },
+        {
+          "l": "Module Completion",
+          "v": "11 / 18"
+        },
+        {
+          "l": "Unit Test Coverage",
+          "v": "78%"
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "name": "GIS & GEO<br>INTELLIGENCE",
+      "icon": "globe",
+      "progress": 55,
+      "status": "On Track",
+      "color": "#2E9E33",
+      "weight": 1,
+      "kpis": [
+        {
+          "l": "Datasets Integrated",
+          "v": "7 / 14"
+        },
+        {
+          "l": "Maps / Layers Created",
+          "v": "16"
+        },
+        {
+          "l": "Accuracy Rate",
+          "v": "92%"
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "name": "MARKETING",
+      "icon": "megaphone",
+      "progress": 50,
+      "status": "In Progress",
+      "color": "#F57C00",
+      "weight": 1,
+      "kpis": [
+        {
+          "l": "Campaigns Launched",
+          "v": "2 / 6"
+        },
+        {
+          "l": "Content Assets",
+          "v": "24"
+        },
+        {
+          "l": "Reach (Farmers)",
+          "v": "125K"
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "name": "HARDWARE, CLOUD<br>& INFRASTRUCTURE",
+      "icon": "cloud",
+      "progress": 48,
+      "status": "In Progress",
+      "color": "#7B3FA0",
+      "weight": 1,
+      "kpis": [
+        {
+          "l": "Infra Setup",
+          "v": "65%"
+        },
+        {
+          "l": "Cloud Services",
+          "v": "5 / 8"
+        },
+        {
+          "l": "Security Compliance",
+          "v": "70%"
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "name": "FIELD MARKETING",
+      "icon": "people",
+      "progress": 45,
+      "status": "In Progress",
+      "color": "#00897B",
+      "weight": 1,
+      "kpis": [
+        {
+          "l": "Field Teams Onboarded",
+          "v": "6 / 12"
+        },
+        {
+          "l": "Locations Covered",
+          "v": "18"
+        },
+        {
+          "l": "Farmers Engaged",
+          "v": "8,450"
+        }
+      ]
+    }
+  ],
+  "overallTitle": "OVERALL PROJECT PROGRESS",
+  "overall": {
+    "percent": 32,
+    "caption": "Completed",
+    "minLabel": "0%",
+    "maxLabel": "100%"
+  },
+  "timelineTitle": "EXECUTION TIMELINE (17 WEEKS)",
+  "phases": [
+    {
+      "name": "FOUNDATION",
+      "weeks": "(2 WEEKS)",
+      "span": 2
+    },
+    {
+      "name": "PLATFORM DEVELOPMENT",
+      "weeks": "(4 WEEKS)",
+      "span": 4
+    },
+    {
+      "name": "PILOT & VALIDATION",
+      "weeks": "(4 WEEKS)",
+      "span": 4
+    },
+    {
+      "name": "AI & FINANCIAL SERVICES",
+      "weeks": "(4 WEEKS)",
+      "span": 4
+    },
+    {
+      "name": "NATIONAL ROLLOUT",
+      "weeks": "(3 WEEKS)",
+      "span": 3
+    }
+  ],
+  "nodes": [
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "progress",
+    "planned",
+    "planned",
+    "planned",
+    "planned",
+    "planned",
+    "pending",
+    "pending",
+    "pending",
+    "pending",
+    "pending",
+    "pending"
+  ],
+  "legend": [
+    {
+      "l": "Completed",
+      "c": "#2E9E33"
+    },
+    {
+      "l": "In Progress",
+      "c": "#1976D2"
+    },
+    {
+      "l": "Planned",
+      "c": "#C9CDD3"
+    },
+    {
+      "l": "Pending",
+      "c": "#DFE3E8"
+    }
+  ],
+  "highlightsTitle": "KEY HIGHLIGHTS (THIS WEEK)",
+  "highlights": [
+    "Android app uploaded on Play Store (pending final approval)",
+    "iOS app uploaded on App Store",
+    "Contract secured for 4 months accelerated delivery",
+    "Initial scope session for FSD (GIS, Marketing, Software, Field Marketing) concluded. 2nd rounds to follow in coming days."
+  ],
+  "upcomingTitle": "UPCOMING NEXT WEEK (WEEK 5)",
+  "upcoming": [
+    "Continue development of core modules & API integrations",
+    "GIS data verification and map layer expansion",
+    "Marketing campaigns optimization & content roll-out",
+    "Field team onboarding & training kick-off",
+    "Infrastructure scaling & security hardening"
+  ],
+  "weeklyTitle": "WEEKLY PROGRESS OVERVIEW",
+  "weekly": [
+    {
+      "week": "W1",
+      "period": "03 – 09 Aug",
+      "plan": "5%",
+      "actual": "5%",
+      "variance": "0%",
+      "status": "done"
+    },
+    {
+      "week": "W2",
+      "period": "10 – 16 Aug",
+      "plan": "10%",
+      "actual": "11%",
+      "variance": "+1%",
+      "status": "done"
+    },
+    {
+      "week": "W3",
+      "period": "17 – 23 Aug",
+      "plan": "15%",
+      "actual": "15%",
+      "variance": "0%",
+      "status": "done"
+    },
+    {
+      "week": "W4",
+      "period": "24 – 30 Aug",
+      "plan": "20%",
+      "actual": "21%",
+      "variance": "+1%",
+      "status": "done"
+    },
+    {
+      "week": "W5",
+      "period": "31 Aug – 06 Sep",
+      "plan": "25%",
+      "actual": "27%",
+      "variance": "+2%",
+      "status": "done"
+    },
+    {
+      "week": "W6",
+      "period": "07 – 13 Aug",
+      "plan": "30%",
+      "actual": "-",
+      "variance": "-",
+      "status": "wait"
+    },
+    {
+      "week": "W7",
+      "period": "14 – 20 Aug",
+      "plan": "35%",
+      "actual": "-",
+      "variance": "-",
+      "status": "wait"
+    },
+    {
+      "week": "W8",
+      "period": "21 – 27 Aug",
+      "plan": "40%",
+      "actual": "-",
+      "variance": "-",
+      "status": "wait"
+    }
+  ],
+  "riskTitle": "RISK & ISSUE SUMMARY",
+  "risks": [
+    {
+      "icon": "warning",
+      "label": "HIGH RISKS",
+      "value": "2",
+      "sub": "Action Required",
+      "color": "#D32F2F"
+    },
+    {
+      "icon": "alert",
+      "label": "MEDIUM RISKS",
+      "value": "1",
+      "sub": "Monitoring",
+      "color": "#F57C00"
+    },
+    {
+      "icon": "info",
+      "label": "OPEN ISSUES",
+      "value": "6",
+      "sub": "In Progress",
+      "color": "#1976D2"
+    },
+    {
+      "icon": "check",
+      "label": "RESOLVED",
+      "value": "12",
+      "sub": "Closed",
+      "color": "#2E9E33"
+    }
+  ],
+  "snapTitle": "PROJECT KPI SNAPSHOT (CUMULATIVE)",
+  "snapshot": [
+    {
+      "icon": "download",
+      "label": "APP DOWNLOADS",
+      "value": "45,620 / 300,000",
+      "pct": "15%",
+      "color": "#2E9E33"
+    },
+    {
+      "icon": "user",
+      "label": "VERIFIED SIGN-UPS",
+      "value": "18,230 / 120,000",
+      "pct": "15%",
+      "color": "#1976D2"
+    },
+    {
+      "icon": "users",
+      "label": "ACTIVE USERS (MAU)",
+      "value": "9,850 / 60,000",
+      "pct": "16%",
+      "color": "#F57C00"
+    },
+    {
+      "icon": "wallet",
+      "label": "PAYING USERS",
+      "value": "1,250 / 10,000",
+      "pct": "13%",
+      "color": "#7B3FA0"
+    },
+    {
+      "icon": "money",
+      "label": "REVENUE (PKR)",
+      "value": "8.6M / 50M",
+      "pct": "17%",
+      "color": "#00897B"
+    }
+  ],
+  "stakeTitle": "STAKEHOLDER ACTIONS & DEADLINES",
+  "stakeHead": [
+    "STAKEHOLDER",
+    "ACTION REQUIRED",
+    "DUE DATE",
+    "STATUS"
+  ],
+  "stakeholders": [
+    {
+      "who": "All Stakeholders",
+      "action": "Submit Implementation Plan",
+      "due": "15th Aug 2026",
+      "status": "wait"
+    },
+    {
+      "who": "All Stakeholders",
+      "action": "Share Dependencies & Roadblocks",
+      "due": "15th Aug 2026",
+      "status": "wait"
+    },
+    {
+      "who": "All Stakeholders",
+      "action": "Confirm Action Items & Owners",
+      "due": "15th Aug 2026",
+      "status": "wait"
+    }
+  ],
+  "footer": [
+    {
+      "icon": "target",
+      "title": "OUR GOAL",
+      "desc": "Deliver a robust, scalable and impactful system<br>for millions of farmers across Pakistan."
+    },
+    {
+      "icon": "team",
+      "title": "ONE TEAM. ONE GOAL.",
+      "desc": "MILLIONS OF FARMERS. LIMITLESS IMPACT.",
+      "bold": true
+    },
+    {
+      "icon": "leaf",
+      "title": "EMPOWER FARMERS.",
+      "desc": "DRIVE PROSPERITY.",
+      "bold": true
+    },
+    {
+      "icon": "sprout",
+      "title": "",
+      "desc": "Let's build the future of agriculture – together!",
+      "lite": true
+    }
+  ],
+  "auto": {
+    "enabled": true,
+    "startDate": "2026-07-15",
+    "endDate": "2026-11-10",
+    "asOfDate": "2026-08-11",
+    "overallMode": "weekly",
+    "partsMode": "kpis",
+    "varianceMode": "auto",
+    "statusMode": "auto",
+    "planMode": "manual",
+    "periodsMode": "manual",
+    "nodesMode": "auto",
+    "plannedWindow": 5,
+    "snapshotMode": "auto",
+    "healthMode": "auto",
+    "daysMode": "auto",
+    "durationMode": "auto",
+    "currentWeekMode": "auto",
+    "titlesMode": "auto"
+  }
+}

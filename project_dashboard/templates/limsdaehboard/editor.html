@@ -1,0 +1,1678 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Editor — Agri One-OS (K2P)</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --green: #2E9E33;
+      --green-dark: #1B5E20;
+      --green-deep: #14561A;
+      --navy: #1F3864;
+      --line: #E3E6EA;
+      --ink: #1A1A1A;
+      --muted: #6B7280
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #F3F5F7;
+      color: var(--ink)
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--green-deep);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 22px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .18);
+      flex-wrap: wrap
+    }
+
+    .topbar h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-right: auto
+    }
+
+    .topbar h1 small {
+      display: block;
+      font-family: 'Inter';
+      font-size: 11.5px;
+      font-weight: 400;
+      opacity: .8;
+      letter-spacing: 0
+    }
+
+    .btn {
+      font: 600 13px 'Inter', sans-serif;
+      border: 0;
+      border-radius: 7px;
+      padding: 9px 16px;
+      cursor: pointer;
+      background: #fff;
+      color: var(--green-deep);
+      text-decoration: none;
+      display: inline-block
+    }
+
+    .btn.primary {
+      background: #F9A825;
+      color: #3A2A00
+    }
+
+    .btn.line {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, .55)
+    }
+
+    .btn:hover {
+      opacity: .9
+    }
+
+    .wrap {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 0;
+      align-items: start
+    }
+
+    .nav {
+      position: sticky;
+      top: 60px;
+      padding: 16px 12px;
+      max-height: calc(100vh - 60px);
+      overflow: auto
+    }
+
+    .nav a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #42566B;
+      text-decoration: none;
+      border-radius: 7px
+    }
+
+    .nav a:hover {
+      background: #E7EBEF
+    }
+
+    .nav a.active {
+      background: var(--green-deep);
+      color: #fff
+    }
+
+    .content {
+      padding: 18px 22px 60px;
+      max-width: 1150px
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      scroll-margin-top: 72px
+    }
+
+    .card>h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 19px;
+      letter-spacing: .4px;
+      color: #fff;
+      background: var(--navy);
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .card>h2 .cnt {
+      font: 600 11px 'Inter';
+      background: rgba(255, 255, 255, .2);
+      padding: 2px 8px;
+      border-radius: 20px
+    }
+
+    .card .inner {
+      padding: 14px 16px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px
+    }
+
+    .f {
+      display: flex;
+      flex-direction: column;
+      gap: 5px
+    }
+
+    .f label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      color: var(--muted);
+      text-transform: uppercase
+    }
+
+    .f input,
+    .f select,
+    .f textarea {
+      font: 400 13.5px 'Inter', sans-serif;
+      padding: 9px 11px;
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      width: 100%
+    }
+
+    .f textarea {
+      min-height: 64px;
+      resize: vertical;
+      line-height: 1.45
+    }
+
+    .f input:focus,
+    .f select:focus,
+    .f textarea:focus {
+      outline: 2px solid #A5D6A7;
+      border-color: var(--green)
+    }
+
+    .f .hint {
+      font-size: 11px;
+      color: #9AA3AD
+    }
+
+    .f.color-f {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px
+    }
+
+    .f.color-f input[type=color] {
+      width: 44px;
+      height: 38px;
+      padding: 2px;
+      flex: none
+    }
+
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #FAFBFC
+    }
+
+    .item .ihead {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px
+    }
+
+    .item .ihead b {
+      font-size: 13px;
+      color: var(--navy)
+    }
+
+    .item .ihead .sp {
+      margin-left: auto;
+      display: flex;
+      gap: 6px
+    }
+
+    .mini {
+      font: 600 11.5px 'Inter';
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #42566B;
+      border-radius: 6px;
+      padding: 5px 10px;
+      cursor: pointer
+    }
+
+    .mini.danger {
+      color: #C62828;
+      border-color: #F1C4C4
+    }
+
+    .mini:hover {
+      background: #EEF1F4
+    }
+
+    .addrow {
+      margin-top: 2px
+    }
+
+    .sub {
+      border-left: 3px solid #DDE3E8;
+      padding-left: 12px;
+      margin: 10px 0 4px
+    }
+
+    .sub>h4 {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .preview {
+      margin-top: 16px;
+      border: 1px solid #CDE6CE;
+      background: #F3F9F3;
+      border-radius: 10px;
+      padding: 12px 14px
+    }
+
+    .preview h4 {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: #1B5E20;
+      margin-bottom: 8px
+    }
+
+    .preview p {
+      font-size: 13px;
+      color: #5A6672
+    }
+
+    .prow {
+      display: grid;
+      grid-template-columns: 170px 1fr auto;
+      gap: 10px;
+      align-items: baseline;
+      font-size: 13px;
+      padding: 5px 0;
+      border-top: 1px solid #DEEBDE
+    }
+
+    .prow:first-of-type {
+      border-top: 0
+    }
+
+    .prow span {
+      color: #5A6672
+    }
+
+    .prow b {
+      color: #14561A;
+      font-weight: 700
+    }
+
+    .prow i {
+      font-style: normal;
+      font-size: 11.5px;
+      color: #8A9AA0;
+      text-align: right
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--green-deep);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+      transition: transform .28s;
+      z-index: 99
+    }
+
+    .toast.on {
+      transform: translateX(-50%) translateY(0)
+    }
+
+    @media(max-width:900px) {
+      .wrap {
+        grid-template-columns: 1fr
+      }
+
+      .nav {
+        position: static;
+        max-height: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 0 12px 8px
+      }
+
+      .content {
+        padding: 14px 16px 60px
+      }
+
+      .topbar {
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 16px
+      }
+
+      .topbar h1 {
+        flex: 1 1 100%;
+        margin-right: 0
+      }
+
+      .topbar .btn,
+      .topbar label.btn {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 140px
+      }
+    }
+
+    @media(max-width:640px) {
+      .topbar {
+        padding: 12px 12px
+      }
+
+      .topbar .btn,
+      .topbar label.btn {
+        flex: 1 1 100%;
+        width: 100%
+      }
+
+      .nav a {
+        flex: 1 1 100%
+      }
+
+      .content {
+        padding: 14px 12px 60px
+      }
+
+      .card {
+        margin-bottom: 12px
+      }
+
+      .preview {
+        padding: 12px
+      }
+
+      .prow {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        text-align: left
+      }
+
+      .prow b {
+        margin-top: 4px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar" id="topbar">
+    <h1>Dashboard Editor <small>Agri One-OS (K2P) — change any value, then save</small></h1>
+    <button class="btn primary" onclick="save(true)">Save &amp; open dashboard</button>
+    <button class="btn" onclick="save(false)">Save changes</button>
+    <button class="btn line" onclick="exportJSON()">Export JSON</button>
+    <label class="btn line" style="cursor:pointer">Import JSON<input type="file" accept=".json" hidden
+        onchange="importJSON(this)"></label>
+    <button class="btn line" onclick="resetAll()">Reload from backend</button>
+  </div>
+
+  <div class="wrap">
+    <nav class="nav" id="nav"></nav>
+    <main class="content" id="content"></main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="{% static 'limsdaehboard/auth.js' %}"></script>
+  <script>
+    /* ============ LOGIN GATE — admin & CEO only, guests are sent to the dashboard ============ */
+    const SESSION = requireAuth({
+      subtitle: 'Sign in to edit the dashboard',
+
+      allowRoles: [
+        'admin',
+        'administrator',
+        'ceo',
+        'project manager',
+        'project & commercial manager'
+      ],
+
+      redirectTo: '/api/lims-dashboard/',
+
+      deniedMessage:
+        'You do not have permission to edit the project dashboard.'
+    });
+    if (SESSION) renderUserBar(document.getElementById('topbar'), SESSION, 'btn line');
+
+    /* ============ DEFAULT DATA (identical to dashboard.html) ============ */
+    const DEFAULT_DATA = {
+      brand: {
+        productName: "AgriOne-OS", productSub: "(K2P)",
+        companyA: "SYNTEC", companyB: "X", companyTag: "Simplifying Technology"
+      },
+      header: {
+        eyebrow: "AGRI ONE-OS (K2P) PROJECT",
+        title: "LIVE PROJECT DASHBOARD",
+        subtitle: "Together, we enable a Digital & Prosperous Agriculture Ecosystem",
+        updatedLabel: "LAST UPDATED", updatedDate: "11 Aug 2026", updatedTime: "11:00 AM",
+        pmLabel: "REPORTING PM", pmName: "Oumar Nawaz", pmRole: "Project & Commercial Manager"
+      },
+      stats: [
+        { icon: "calendar", label: "PROJECT DURATION", value: "17 WEEKS", sub: "(15 Jul – 10 Nov 2026)", bind: "duration" },
+        { icon: "calendar", label: "CURRENT WEEK", value: "WEEK 4", sub: "(5 – 11 Aug 2026)", bind: "currentWeek" },
+        { icon: "pulse", label: "PROJECT HEALTH", value: "GOOD", sub: "On Track", health: true, bind: "health" },
+        { icon: "target", label: "OVERALL PROGRESS", value: "32%", sub: "Completed", bind: "overall" },
+        { icon: "calendar", label: "DAYS ELAPSED", value: "21 / 119", sub: "Days", bind: "daysElapsed" },
+        { icon: "hourglass", label: "DAYS REMAINING", value: "98", sub: "Days", bind: "daysRemaining" }
+      ],
+      partsTitle: "5 PARTS PROGRESS & KPI SUMMARY",
+      parts: [
+        {
+          num: 1, name: "SOFTWARE<br>(APP & PORTAL)", icon: "code", progress: 62, status: "On Track", color: "#2E9E33", weight: 1,
+          kpis: [{ l: "Modules Completed", v: "36 / 58" }, { l: "Bugs Closed", v: "42" }, { l: "Module Completion", v: "11 / 18" }, { l: "Unit Test Coverage", v: "78%" }]
+        },
+        {
+          num: 2, name: "GIS & GEO<br>INTELLIGENCE", icon: "globe", progress: 55, status: "On Track", color: "#2E9E33", weight: 1,
+          kpis: [{ l: "Datasets Integrated", v: "7 / 14" }, { l: "Maps / Layers Created", v: "16" }, { l: "Accuracy Rate", v: "92%" }]
+        },
+        {
+          num: 3, name: "MARKETING", icon: "megaphone", progress: 50, status: "In Progress", color: "#F57C00", weight: 1,
+          kpis: [{ l: "Campaigns Launched", v: "2 / 6" }, { l: "Content Assets", v: "24" }, { l: "Reach (Farmers)", v: "125K" }]
+        },
+        {
+          num: 4, name: "HARDWARE, CLOUD<br>& INFRASTRUCTURE", icon: "cloud", progress: 48, status: "In Progress", color: "#7B3FA0", weight: 1,
+          kpis: [{ l: "Infra Setup", v: "65%" }, { l: "Cloud Services", v: "5 / 8" }, { l: "Security Compliance", v: "70%" }]
+        },
+        {
+          num: 5, name: "FIELD MARKETING", icon: "people", progress: 45, status: "In Progress", color: "#00897B", weight: 1,
+          kpis: [{ l: "Field Teams Onboarded", v: "6 / 12" }, { l: "Locations Covered", v: "18" }, { l: "Farmers Engaged", v: "8,450" }]
+        }
+      ],
+      overallTitle: "OVERALL PROJECT PROGRESS",
+      overall: { percent: 32, caption: "Completed", minLabel: "0%", maxLabel: "100%" },
+      timelineTitle: "EXECUTION TIMELINE (17 WEEKS)",
+      phases: [
+        { name: "FOUNDATION", weeks: "(2 WEEKS)", span: 2 },
+        { name: "PLATFORM DEVELOPMENT", weeks: "(4 WEEKS)", span: 4 },
+        { name: "PILOT & VALIDATION", weeks: "(4 WEEKS)", span: 4 },
+        { name: "AI & FINANCIAL SERVICES", weeks: "(4 WEEKS)", span: 4 },
+        { name: "NATIONAL ROLLOUT", weeks: "(3 WEEKS)", span: 3 }
+      ],
+      nodes: ["completed", "completed", "completed", "completed", "completed", "progress",
+        "planned", "planned", "planned", "planned", "planned",
+        "pending", "pending", "pending", "pending", "pending", "pending"],
+      legend: [{ l: "Completed", c: "#2E9E33" }, { l: "In Progress", c: "#1976D2" }, { l: "Planned", c: "#C9CDD3" }, { l: "Pending", c: "#DFE3E8" }],
+      highlightsTitle: "KEY HIGHLIGHTS (THIS WEEK)",
+      highlights: [
+        "Android app uploaded on Play Store (pending final approval)",
+        "iOS app uploaded on App Store",
+        "Contract secured for 4 months accelerated delivery",
+        "Initial scope session for FSD (GIS, Marketing, Software, Field Marketing) concluded. 2nd rounds to follow in coming days."
+      ],
+      upcomingTitle: "UPCOMING NEXT WEEK (WEEK 5)",
+      upcoming: [
+        "Continue development of core modules & API integrations",
+        "GIS data verification and map layer expansion",
+        "Marketing campaigns optimization & content roll-out",
+        "Field team onboarding & training kick-off",
+        "Infrastructure scaling & security hardening"
+      ],
+      weeklyTitle: "WEEKLY PROGRESS OVERVIEW",
+      weekly: [
+        { week: "W1", period: "03 – 09 Aug", plan: "5%", actual: "5%", variance: "0%", status: "done" },
+        { week: "W2", period: "10 – 16 Aug", plan: "10%", actual: "11%", variance: "+1%", status: "done" },
+        { week: "W3", period: "17 – 23 Aug", plan: "15%", actual: "15%", variance: "0%", status: "done" },
+        { week: "W4", period: "24 – 30 Aug", plan: "20%", actual: "21%", variance: "+1%", status: "done" },
+        { week: "W5", period: "31 Aug – 06 Sep", plan: "25%", actual: "27%", variance: "+2%", status: "done" },
+        { week: "W6", period: "07 – 13 Aug", plan: "30%", actual: "-", variance: "-", status: "wait" },
+        { week: "W7", period: "14 – 20 Aug", plan: "35%", actual: "-", variance: "-", status: "wait" },
+        { week: "W8", period: "21 – 27 Aug", plan: "40%", actual: "-", variance: "-", status: "wait" }
+      ],
+      riskTitle: "RISK & ISSUE SUMMARY",
+      risks: [
+        { icon: "warning", label: "HIGH RISKS", value: "2", sub: "Action Required", color: "#D32F2F" },
+        { icon: "alert", label: "MEDIUM RISKS", value: "1", sub: "Monitoring", color: "#F57C00" },
+        { icon: "info", label: "OPEN ISSUES", value: "6", sub: "In Progress", color: "#1976D2" },
+        { icon: "check", label: "RESOLVED", value: "12", sub: "Closed", color: "#2E9E33" }
+      ],
+      snapTitle: "PROJECT KPI SNAPSHOT (CUMULATIVE)",
+      snapshot: [
+        { icon: "download", label: "APP DOWNLOADS", value: "45,620 / 300,000", pct: "15%", color: "#2E9E33" },
+        { icon: "user", label: "VERIFIED SIGN-UPS", value: "18,230 / 120,000", pct: "15%", color: "#1976D2" },
+        { icon: "users", label: "ACTIVE USERS (MAU)", value: "9,850 / 60,000", pct: "16%", color: "#F57C00" },
+        { icon: "wallet", label: "PAYING USERS", value: "1,250 / 10,000", pct: "13%", color: "#7B3FA0" },
+        { icon: "money", label: "REVENUE (PKR)", value: "8.6M / 50M", pct: "17%", color: "#00897B" }
+      ],
+      stakeTitle: "STAKEHOLDER ACTIONS & DEADLINES",
+      stakeHead: ["STAKEHOLDER", "ACTION REQUIRED", "DUE DATE", "STATUS"],
+      stakeholders: [
+        { who: "All Stakeholders", action: "Submit Implementation Plan", due: "15th Aug 2026", status: "wait" },
+        { who: "All Stakeholders", action: "Share Dependencies & Roadblocks", due: "15th Aug 2026", status: "wait" },
+        { who: "All Stakeholders", action: "Confirm Action Items & Owners", due: "15th Aug 2026", status: "wait" }
+      ],
+      footer: [
+        { icon: "target", title: "OUR GOAL", desc: "Deliver a robust, scalable and impactful system<br>for millions of farmers across Pakistan." },
+        { icon: "team", title: "ONE TEAM. ONE GOAL.", desc: "MILLIONS OF FARMERS. LIMITLESS IMPACT.", bold: true },
+        { icon: "leaf", title: "EMPOWER FARMERS.", desc: "DRIVE PROSPERITY.", bold: true },
+        { icon: "sprout", title: "", desc: "Let's build the future of agriculture – together!", lite: true }
+      ],
+
+      /* ---- AUTO-CALCULATION SETTINGS ----
+         Set any mode to "manual" to type that value yourself instead. */
+      auto: {
+        enabled: true,
+        startDate: "2026-07-15",     // project start
+        endDate: "2026-11-10",       // project end
+        asOfDate: "2026-08-11",      // "as of" date = the reporting date
+        overallMode: "weekly",       // weekly = latest actual % in the weekly table | parts = weighted avg of the 5 parts | manual
+        partsMode: "kpis",           // kpis = each part % from its own KPI lines | manual
+        varianceMode: "auto",        // actual - plan
+        statusMode: "auto",          // week ticked once an actual % is entered
+        planMode: "manual",          // linear = plan % spread evenly to 100% | manual
+        periodsMode: "manual",       // auto = week dates generated from the start date | manual
+        nodesMode: "auto",           // timeline dots follow the current week | manual
+        plannedWindow: 5,            // how many weeks after the current one show as "Planned"
+        snapshotMode: "auto",        // KPI snapshot % from actual / target
+        healthMode: "auto",          // health from the latest variance
+        daysMode: "auto",            // days elapsed / remaining from the dates
+        durationMode: "auto",        // duration + date range from the dates
+        currentWeekMode: "auto",     // week number + its date range from the dates
+        titlesMode: "auto"           // week counts inside section titles
+      }
+    };
+
+    /* =========================================================
+       AUTO-CALCULATION ENGINE
+       ========================================================= */
+    const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const DAY = 864e5;
+    function pDate(s) { const d = new Date(String(s || '') + "T00:00:00"); return isNaN(d.getTime()) ? null : d; }
+    function fD(d) { return d.getDate() + " " + MONTHS[d.getMonth()]; }
+    function fDY(d) { return fD(d) + " " + d.getFullYear(); }
+    function fRange(a, b, year) {
+      if (!a || !b) return "";
+      const y = year ? (" " + b.getFullYear()) : "";
+      return a.getMonth() === b.getMonth()
+        ? `${a.getDate()} – ${b.getDate()} ${MONTHS[b.getMonth()]}${y}`
+        : `${fD(a)} – ${fD(b)}${y}`;
+    }
+    function toNum(s) {
+      if (typeof s === 'number') return s;
+      if (typeof s !== 'string') return NaN;
+      const t = s.replace(/,/g, '').replace(/%/g, '').replace(/PKR|Rs\.?/gi, '').trim();
+      const m = t.match(/^([+-]?\d*\.?\d+)\s*([KkMmBb])?$/);
+      if (!m) return NaN;
+      let n = parseFloat(m[1]); const suf = (m[2] || '').toLowerCase();
+      if (suf === 'k') n *= 1e3; else if (suf === 'm') n *= 1e6; else if (suf === 'b') n *= 1e9;
+      return n;
+    }
+    function ratioPct(s) {
+      if (typeof s !== 'string') return NaN;
+      const p = s.split('/');
+      if (p.length === 2) { const a = toNum(p[0]), b = toNum(p[1]); if (isFinite(a) && isFinite(b) && b > 0) return a / b * 100; }
+      const one = toNum(s);
+      return (s.includes('%') && isFinite(one)) ? one : NaN;
+    }
+
+    function computeAll(D) {
+      const A = D.auto || {};
+      const out = { totals: null };
+      if (A.enabled === false) return out;
+
+      const start = pDate(A.startDate), end = pDate(A.endDate), asOf = pDate(A.asOfDate);
+      let totalDays = 0, elapsed = 0, remaining = 0, totalWeeks = 0, curWeek = 1, wkS = null, wkE = null;
+      if (start && end && asOf && end > start) {
+        totalDays = Math.round((end - start) / DAY) + 1;
+        elapsed = Math.max(0, Math.min(totalDays, Math.round((asOf - start) / DAY) + 1));
+        remaining = Math.max(0, totalDays - elapsed);
+        totalWeeks = Math.ceil(totalDays / 7);
+        curWeek = Math.max(1, Math.min(totalWeeks, Math.ceil(elapsed / 7) || 1));
+        wkS = new Date(start.getTime() + (curWeek - 1) * 7 * DAY);
+        wkE = new Date(Math.min(end.getTime(), wkS.getTime() + 6 * DAY));
+      }
+
+      /* --- part % from its KPI lines --- */
+      if (A.partsMode === 'kpis') {
+        D.parts.forEach(p => {
+          const vals = (p.kpis || []).map(k => ratioPct(k.v)).filter(v => isFinite(v));
+          if (vals.length) p.progress = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+        });
+      }
+
+      /* --- weekly table: periods, plan, variance, status --- */
+      D.weekly.forEach((w, i) => {
+        if (A.planMode === 'linear' && totalWeeks) w.plan = Math.round((i + 1) / totalWeeks * 100) + "%";
+        if (A.periodsMode === 'auto' && start) {
+          const s = new Date(start.getTime() + i * 7 * DAY);
+          const e = new Date(end ? Math.min(end.getTime(), s.getTime() + 6 * DAY) : s.getTime() + 6 * DAY);
+          w.period = fRange(s, e, false);
+        }
+        const a = toNum(w.actual), p = toNum(w.plan);
+        if (A.varianceMode !== 'manual') {
+          if (isFinite(a) && isFinite(p)) { const v = Math.round((a - p) * 10) / 10; w.variance = (v > 0 ? '+' : '') + v + '%'; }
+          else w.variance = '-';
+        }
+        if (A.statusMode !== 'manual') w.status = isFinite(a) ? 'done' : 'wait';
+      });
+
+      /* --- overall progress --- */
+      let overall = Number(D.overall.percent) || 0, overallFrom = 'typed in manually';
+      if (A.overallMode === 'weekly') {
+        for (let i = D.weekly.length - 1; i >= 0; i--) {
+          const a = toNum(D.weekly[i].actual);
+          if (isFinite(a)) { overall = a; overallFrom = 'latest actual % (' + D.weekly[i].week + ')'; break; }
+        }
+      } else if (A.overallMode === 'parts') {
+        let ws = 0, sum = 0;
+        D.parts.forEach(p => { const w = (Number(p.weight) || 1); ws += w; sum += w * (Number(p.progress) || 0); });
+        overall = ws ? sum / ws : 0; overallFrom = 'weighted average of the 5 parts';
+      }
+      overall = Math.round(overall);
+      D.overall.percent = overall;
+
+      /* --- project health from the latest variance --- */
+      let hv = 'GOOD', hs = 'On Track', lastVar = null;
+      for (let i = D.weekly.length - 1; i >= 0; i--) {
+        const a = toNum(D.weekly[i].actual), p = toNum(D.weekly[i].plan);
+        if (isFinite(a) && isFinite(p)) { lastVar = a - p; break; }
+      }
+      if (lastVar !== null) {
+        if (lastVar >= 0) { hv = 'GOOD'; hs = 'On Track'; }
+        else if (lastVar >= -5) { hv = 'WATCH'; hs = 'Minor Slippage'; }
+        else { hv = 'AT RISK'; hs = 'Action Required'; }
+      }
+
+      /* --- top stat strip --- */
+      D.stats.forEach(s => {
+        switch (s.bind) {
+          case 'duration':
+            if (A.durationMode !== 'manual' && start && end) { s.value = totalWeeks + ' WEEKS'; s.sub = `(${fD(start)} – ${fDY(end)})`; }
+            break;
+          case 'currentWeek':
+            if (A.currentWeekMode !== 'manual' && wkS) { s.value = 'WEEK ' + curWeek; s.sub = `(${fRange(wkS, wkE, true)})`; }
+            break;
+          case 'health':
+            if (A.healthMode !== 'manual') { s.value = hv; s.sub = hs; }
+            break;
+          case 'overall':
+            s.value = overall + '%';
+            break;
+          case 'daysElapsed':
+            if (A.daysMode !== 'manual' && totalDays) { s.value = elapsed + ' / ' + totalDays; }
+            break;
+          case 'daysRemaining':
+            if (A.daysMode !== 'manual' && totalDays) { s.value = String(remaining); }
+            break;
+        }
+      });
+
+      /* --- timeline dots --- */
+      if (A.nodesMode !== 'manual') {
+        const n = D.phases.reduce((s, p) => s + Math.max(1, Math.round(Number(p.span) || 1)), 0) || D.nodes.length;
+        const win = Number(A.plannedWindow) || 0;
+        const arr = [];
+        for (let i = 1; i <= n; i++)
+          arr.push(i < curWeek ? 'completed' : i === curWeek ? 'progress' : i <= curWeek + win ? 'planned' : 'pending');
+        D.nodes = arr;
+      }
+
+      /* --- week counts inside titles --- */
+      if (A.titlesMode !== 'manual') {
+        D.timelineTitle = String(D.timelineTitle).replace(/\(\s*\d+\s*WEEKS?\s*\)/i, `(${D.nodes.length} WEEKS)`);
+        D.upcomingTitle = String(D.upcomingTitle).replace(/\(\s*WEEK\s*\d+\s*\)/i, `(WEEK ${Math.min(curWeek + 1, D.nodes.length)})`);
+      }
+
+      /* --- KPI snapshot % from actual / target --- */
+      if (A.snapshotMode !== 'manual') {
+        D.snapshot.forEach(k => { const r = ratioPct(k.value); if (isFinite(r)) k.pct = Math.round(r) + '%'; });
+      }
+
+      out.totals = { totalDays, elapsed, remaining, totalWeeks, curWeek, wkS, wkE, overall, overallFrom, health: hv + ' — ' + hs, lastVar };
+      return out;
+    }
+
+    /* ============ WORKING COPY ============ */
+
+      let D = structuredClone(DEFAULT_DATA);
+
+
+      /*
+        Merge backend data with DEFAULT_DATA.
+
+        DEFAULT_DATA now acts only as a UI fallback/schema reference.
+        PostgreSQL/backend is the real source of truth.
+      */
+      function merge(base, over) {
+
+        if (Array.isArray(over)) {
+          return over;
+        }
+
+        if (
+          over &&
+          typeof over === 'object'
+        ) {
+          const output = {
+            ...base
+          };
+
+          for (const key in over) {
+
+            output[key] = merge(
+              base
+                ? base[key]
+                : undefined,
+              over[key]
+            );
+          }
+
+          return output;
+        }
+
+        return (
+          over === undefined
+            ? base
+            : over
+        );
+      }
+
+
+      /*
+        Load the editable dashboard from Django.
+      */
+      async function loadEditorData() {
+
+        const response = await apiFetch(
+          '/api/project-dashboard/k2p/manage/',
+          {
+            cache: 'no-store'
+          }
+        );
+
+        if (!response.ok) {
+
+          let message =
+            'Unable to load dashboard data.';
+
+          try {
+
+            const body =
+              await response.json();
+
+            message =
+              body.detail ||
+              body.message ||
+              message;
+
+          } catch (e) { }
+
+          throw new Error(message);
+        }
+
+        const liveData =
+          await response.json();
+
+        D = merge(
+          structuredClone(DEFAULT_DATA),
+          liveData
+        );
+      }
+
+    /* ============ FIELD VOCABULARY ============ */
+    const LABELS = {
+      productName: "Product name", productSub: "Product sub-line", companyA: "Company name (dark part)",
+      companyB: "Company name (green part)", companyTag: "Company tagline",
+      eyebrow: "Small title above", title: "Main title", subtitle: "Sub-title line",
+      updatedLabel: "Box label", updatedDate: "Date", updatedTime: "Time",
+      pmLabel: "Box label", pmName: "PM name", pmRole: "PM role",
+      label: "Label", value: "Value", sub: "Sub-text", icon: "Icon", health: "Style as health (green)",
+      num: "Number", name: "Name", progress: "Progress %", status: "Status text", color: "Colour", kpis: "KPI lines",
+      l: "Label", v: "Value", c: "Colour", percent: "Percent", caption: "Caption under number",
+      minLabel: "Left end label", maxLabel: "Right end label", weeks: "Duration text", span: "Weeks (width)",
+      week: "Week", period: "Period", plan: "Plan (%)", actual: "Actual (%)", variance: "Variance",
+      pct: "Percent shown", who: "Stakeholder", action: "Action required", due: "Due date",
+      desc: "Text", bold: "Bold style", lite: "Light style",
+      partsTitle: "Panel title", overallTitle: "Panel title", timelineTitle: "Section title",
+      highlightsTitle: "Section title", upcomingTitle: "Section title", weeklyTitle: "Panel title",
+      riskTitle: "Panel title", snapTitle: "Panel title", stakeTitle: "Panel title",
+      weight: "Weight in overall %", bind: "Auto-fill this stat from",
+      enabled: "Auto-calculation", startDate: "Project start date", endDate: "Project end date",
+      asOfDate: "Reporting date (as of)", overallMode: "Overall progress % from",
+      partsMode: "Part progress % from", varianceMode: "Variance", statusMode: "Week tick",
+      planMode: "Plan %", periodsMode: "Week periods", nodesMode: "Timeline dots",
+      plannedWindow: "Weeks shown as “Planned”", snapshotMode: "KPI snapshot %",
+      healthMode: "Project health", daysMode: "Days elapsed / remaining",
+      durationMode: "Duration + date range", currentWeekMode: "Current week",
+      titlesMode: "Week counts in titles"
+    };
+    const HINTS = {
+      percent: "Auto-calculated — see Auto-calculation.",
+      variance: "Auto = actual - plan.",
+      pct: "Auto = actual ÷ target.",
+      weight: "Only used when overall % comes from the parts.",
+      bind: "Auto-filled stats ignore what you type below.",
+      plannedWindow: "Weeks after the current one shown in light grey.",
+      asOfDate: "Drives current week, days elapsed and the timeline dots."
+    };
+    const KEY_OPTIONS = {
+      overallMode: ["weekly", "parts", "manual"],
+      partsMode: ["manual", "kpis"],
+      varianceMode: ["auto", "manual"],
+      statusMode: ["auto", "manual"],
+      planMode: ["manual", "linear"],
+      periodsMode: ["manual", "auto"],
+      nodesMode: ["auto", "manual"],
+      snapshotMode: ["auto", "manual"],
+      healthMode: ["auto", "manual"],
+      daysMode: ["auto", "manual"],
+      durationMode: ["auto", "manual"],
+      currentWeekMode: ["auto", "manual"],
+      titlesMode: ["auto", "manual"],
+      bind: ["", "duration", "currentWeek", "health", "overall", "daysElapsed", "daysRemaining"]
+    };
+    const MODE_TEXT = {
+      weekly: "Latest actual % in the weekly table",
+      parts: "Weighted average of the 5 parts",
+      kpis: "Average of its own KPI lines",
+      linear: "Spread evenly to 100%",
+      auto: "Calculated",
+      manual: "Typed by me",
+      "": "(not auto-filled)",
+      duration: "Project duration", currentWeek: "Current week", health: "Project health",
+      overall: "Overall progress %", daysElapsed: "Days elapsed", daysRemaining: "Days remaining"
+    };
+    const ICONS = {
+      stats: ["calendar", "pulse", "target", "hourglass"],
+      parts: ["code", "globe", "megaphone", "cloud", "people"],
+      risks: ["warning", "alert", "info", "check"],
+      snapshot: ["download", "user", "users", "wallet", "money"],
+      footer: ["target", "team", "leaf", "sprout"]
+    };
+    const SECTIONS = [
+      { id: "auto", t: "Auto-calculation", keys: ["auto"], calc: true },
+      { id: "brand", t: "Logo & company", keys: ["brand"] },
+      { id: "header", t: "Header titles & boxes", keys: ["header"] },
+      { id: "stats", t: "Top stat strip", keys: ["stats"], list: true, itemName: "Stat" },
+      { id: "parts", t: "5 parts progress & KPIs", keys: ["partsTitle", "parts"], list: true, itemName: "Part" },
+      { id: "overall", t: "Overall progress gauge", keys: ["overallTitle", "overall"] },
+      { id: "timeline", t: "Execution timeline", keys: ["timelineTitle", "phases", "nodes", "legend"] },
+      { id: "notes", t: "Highlights & next week", keys: ["highlightsTitle", "highlights", "upcomingTitle", "upcoming"] },
+      { id: "weekly", t: "Weekly progress table", keys: ["weeklyTitle", "weekly"], itemName: "Week" },
+      { id: "risks", t: "Risk & issue summary", keys: ["riskTitle", "risks"], itemName: "Tile" },
+      { id: "snapshot", t: "KPI snapshot", keys: ["snapTitle", "snapshot"], itemName: "KPI" },
+      { id: "stake", t: "Stakeholder actions", keys: ["stakeTitle", "stakeHead", "stakeholders"], itemName: "Row" },
+      { id: "footer", t: "Green footer bar", keys: ["footer"], itemName: "Block" }
+    ];
+    const NODE_STATES = ["completed", "progress", "planned", "pending"];
+
+    /* ============ BUILD FORM ============ */
+
+      const nav =
+        document.getElementById('nav');
+
+      const content =
+        document.getElementById('content');
+
+
+      function buildEditorForm() {
+
+        /*
+          Important when importing/reloading:
+          remove previous generated controls first.
+        */
+        nav.innerHTML = '';
+        content.innerHTML = '';
+
+        SECTIONS.forEach(sec => {
+
+          const a =
+            document.createElement('a');
+
+          a.href =
+            '#' + sec.id;
+
+          a.textContent =
+            sec.t;
+
+          nav.appendChild(a);
+
+
+          const card =
+            document.createElement('section');
+
+          card.className =
+            'card';
+
+          card.id =
+            sec.id;
+
+          card.innerHTML = `
+      <h2>${sec.t}</h2>
+      <div class="inner"></div>
+    `;
+
+
+          const inner =
+            card.querySelector('.inner');
+
+
+          if (sec.calc) {
+
+            const intro =
+              document.createElement('p');
+
+            intro.style.cssText =
+              'font-size:13px;' +
+              'color:#5A6672;' +
+              'line-height:1.5;' +
+              'margin-bottom:14px';
+
+            intro.innerHTML =
+              'These settings decide which values ' +
+              'the backend calculates automatically. ' +
+              'Set a mode to <b>Typed by me</b> ' +
+              'when a value must be manually controlled.';
+
+            inner.appendChild(intro);
+          }
+
+
+          sec.keys.forEach(key => {
+
+            inner.appendChild(
+              buildKey(
+                key,
+                sec
+              )
+            );
+
+          });
+
+
+          if (sec.calc) {
+
+            const preview =
+              document.createElement('div');
+
+            preview.className =
+              'preview';
+
+            preview.id =
+              'calcPreview';
+
+            inner.appendChild(preview);
+          }
+
+
+          content.appendChild(card);
+        });
+      }
+
+    /* ---- live preview of the calculated values ---- */
+    function refreshPreview() {
+      const box = document.getElementById('calcPreview'); if (!box) return;
+      const copy = structuredClone(D);
+      let r; try { r = computeAll(copy); } catch (e) { box.innerHTML = '<b>Check the dates</b> — they could not be read.'; return; }
+      if (!r.totals) { box.innerHTML = '<h4>Auto-calculation is off</h4><p>Every value on the dashboard is used exactly as typed.</p>'; return; }
+      const t = r.totals;
+      const rows = [
+        ['Overall progress', t.overall + '%', t.overallFrom],
+        ['Project duration', t.totalWeeks + ' weeks', t.totalDays + ' days'],
+        ['Current week', 'Week ' + t.curWeek, t.wkS ? fRange(t.wkS, t.wkE, true) : '—'],
+        ['Days elapsed', t.elapsed + ' / ' + t.totalDays, t.remaining + ' remaining'],
+        ['Project health', t.health, t.lastVar === null ? 'no variance yet' : 'latest variance ' + (t.lastVar > 0 ? '+' : '') + Math.round(t.lastVar * 10) / 10 + '%'],
+        ['Timeline', copy.nodes.length + ' dots', 'week ' + t.curWeek + ' in progress'],
+        ['Part progress', copy.parts.map(p => p.progress + '%').join('  ·  '), D.auto.partsMode === 'kpis' ? 'from KPI lines' : 'typed by me'],
+        ['Weekly variance', copy.weekly.map(w => w.variance).join('  ·  '), 'actual - plan'],
+        ['KPI snapshot %', copy.snapshot.map(k => k.pct).join('  ·  '), 'actual ÷ target']
+      ];
+      box.innerHTML = '<h4>Calculated right now</h4>' + rows.map(r =>
+        `<div class="prow"><span>${r[0]}</span><b>${r[1]}</b><i>${r[2]}</i></div>`).join('');
+    }
+    document.addEventListener(
+        'input',
+        refreshPreview
+      );
+
+      document.addEventListener(
+        'change',
+        refreshPreview
+      );
+    function applyAutoCalculations() {
+      if (D.auto && D.auto.enabled !== false) {
+        try { computeAll(D); } catch (e) { }
+      }
+    }
+    function buildKey(key, sec) {
+      const val = D[key];
+      const box = document.createElement('div');
+      if (typeof val === 'string' || typeof val === 'number') {
+        box.className = 'grid';
+        box.appendChild(field(LABELS[key] || pretty(key), val, v => D[key] = v, { key }));
+        return box;
+      }
+      if (Array.isArray(val)) return arrayEditor(key, sec);
+      // plain object
+      box.className = 'grid';
+      Object.keys(val).forEach(k => box.appendChild(field(LABELS[k] || pretty(k), val[k], v => D[key][k] = v, { key: k })));
+      return box;
+    }
+
+    function arrayEditor(key, sec) {
+      const wrap = document.createElement('div');
+      const list = document.createElement('div');
+      wrap.appendChild(list);
+
+      const isNodes = key === 'nodes';
+      const isPlainStrings = D[key].every(x => typeof x === 'string');
+
+      function draw() {
+        list.innerHTML = '';
+        D[key].forEach((row, i) => {
+          const item = document.createElement('div'); item.className = 'item';
+          const label = (sec.itemName || pretty(key).replace(/s$/, '')) + ' ' + (i + 1);
+          item.innerHTML = `<div class="ihead"><b>${label}</b><div class="sp"></div></div>`;
+          const sp = item.querySelector('.sp');
+          sp.appendChild(miniBtn('?', () => { if (i > 0) { [D[key][i - 1], D[key][i]] = [D[key][i], D[key][i - 1]]; draw(); } }));
+          sp.appendChild(miniBtn('?', () => { if (i < D[key].length - 1) { [D[key][i + 1], D[key][i]] = [D[key][i], D[key][i + 1]]; draw(); } }));
+          sp.appendChild(miniBtn('Duplicate', () => { D[key].splice(i + 1, 0, structuredClone(D[key][i])); draw(); }));
+          sp.appendChild(miniBtn('Remove', () => { D[key].splice(i, 1); draw(); }, true));
+
+          if (typeof row === 'string') {
+            const g = document.createElement('div'); g.className = 'grid';
+            if (isNodes) {
+              g.appendChild(select('Week ' + (i + 1) + ' state', row, NODE_STATES, v => D[key][i] = v));
+            } else {
+              g.appendChild(field('Text', row, v => D[key][i] = v, { long: true }));
+            }
+            item.appendChild(g);
+          } else {
+            const g = document.createElement('div'); g.className = 'grid';
+            Object.keys(row).forEach(k => {
+              if (Array.isArray(row[k])) return;
+              const isPartsProgress = key === 'parts' && k === 'progress';
+              const isSnapshotValue = key === 'snapshot' && k === 'value';
+              const isSnapshotPct = key === 'snapshot' && k === 'pct';
+              const fieldEl = field(LABELS[k] || pretty(k), row[k], v => {
+                D[key][i][k] = v;
+                if (isSnapshotValue && D.auto && D.auto.snapshotMode === 'auto') {
+                  computeAll(D);
+                  refreshPreview();
+                  const pctEl = item.querySelector('input[data-snapshot-pct],textarea[data-snapshot-pct]');
+                  if (pctEl) pctEl.value = row.pct;
+                }
+              },
+                { key: k, options: (k === 'icon' && ICONS[key]) ? ICONS[key] : (k === 'status' && key !== 'parts') ? ['done', 'wait'] : null });
+              if (isSnapshotPct) {
+                const inputEl = fieldEl.querySelector('input,textarea');
+                if (inputEl) {
+                  inputEl.dataset.snapshotPct = 'true';
+                  if (D.auto && D.auto.snapshotMode === 'auto') inputEl.disabled = true;
+                }
+              }
+              if (isPartsProgress && D.auto && D.auto.partsMode === 'kpis') {
+                const inputEl = fieldEl.querySelector('input,textarea');
+                if (inputEl) {
+                  inputEl.disabled = true;
+                  const hint = document.createElement('span');
+                  hint.className = 'hint';
+                  hint.textContent = 'Auto-calculated from KPI lines.';
+                  fieldEl.appendChild(hint);
+                }
+              }
+              g.appendChild(fieldEl);
+            });
+            item.appendChild(g);
+            // nested arrays (e.g. part KPIs)
+            Object.keys(row).forEach(k => {
+              if (!Array.isArray(row[k])) return;
+              const sub = document.createElement('div'); sub.className = 'sub';
+              sub.innerHTML = `<h4>${LABELS[k] || pretty(k)}</h4>`;
+              const sl = document.createElement('div');
+              const drawSub = () => {
+                sl.innerHTML = '';
+                row[k].forEach((sr, j) => {
+                  const g2 = document.createElement('div'); g2.className = 'grid';
+                  g2.style.marginBottom = '8px';
+                  Object.keys(sr).forEach(k2 => {
+                    g2.appendChild(field(LABELS[k2] || pretty(k2), sr[k2], v => {
+                      row[k][j][k2] = v;
+                      if (key === 'parts' && D.auto && D.auto.partsMode === 'kpis') {
+                        computeAll(D);
+                        refreshPreview();
+                        draw();
+                      }
+                    }, { key: k2 }));
+                  });
+                  const rm = miniBtn('Remove', () => { row[k].splice(j, 1); drawSub(); }, true);
+                  const holder = document.createElement('div'); holder.className = 'f';
+                  holder.innerHTML = '<label>&nbsp;</label>'; holder.appendChild(rm);
+                  g2.appendChild(holder);
+                  sl.appendChild(g2);
+                });
+                const add = miniBtn('+ Add line', () => { row[k].push(blankOf(row[k][0] || { l: '', v: '' })); drawSub(); });
+                add.classList.add('addrow'); sl.appendChild(add);
+              };
+              drawSub(); sub.appendChild(sl); item.appendChild(sub);
+            });
+          }
+          list.appendChild(item);
+        });
+        const add = miniBtn('+ Add ' + (sec.itemName || pretty(key).replace(/s$/, '')).toLowerCase(), () => {
+          const t = D[key][D[key].length - 1];
+          D[key].push(typeof t === 'string' ? (isNodes ? 'pending' : '') : blankOf(t)); draw();
+        });
+        add.classList.add('addrow'); list.appendChild(add);
+      }
+      draw();
+      return wrap;
+    }
+
+    function blankOf(tmpl) {
+      if (typeof tmpl !== 'object') return '';
+      const o = structuredClone(tmpl);
+      for (const k in o) {
+        if (Array.isArray(o[k])) o[k] = o[k].slice(0, 1).map(blankOf);
+        else if (typeof o[k] === 'string' && !['icon', 'color', 'c', 'status'].includes(k)) o[k] = '';
+        else if (typeof o[k] === 'number' && k !== 'span') o[k] = 0;
+      }
+      return o;
+    }
+
+    function pretty(k) { return k.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase()); }
+
+    function field(labelText, value, onChange, opt = {}) {
+      const key = opt.key || '';
+      if (!opt.options && KEY_OPTIONS[key]) opt.options = KEY_OPTIONS[key];
+      const f = document.createElement('div'); f.className = 'f';
+      if (/^(startDate|endDate|asOfDate)$/.test(key)) {
+        f.innerHTML = `<label>${labelText}</label>`;
+        const i = document.createElement('input'); i.type = 'date'; i.value = value;
+        i.oninput = () => onChange(i.value); f.appendChild(i); addHint(f, key); return f;
+      }
+      if (typeof value === 'boolean') {
+        f.innerHTML = `<label>${labelText}</label>`;
+        const s = document.createElement('select');
+        s.innerHTML = `<option value="true">Yes</option><option value="false">No</option>`;
+        s.value = String(value); s.onchange = () => onChange(s.value === 'true'); f.appendChild(s); addHint(f, key); return f;
+      }
+      if (opt.options) { const sf = select(labelText, value, opt.options, onChange); addHint(sf, key); return sf; }
+      if (key === 'color' || key === 'c') {
+        const box = document.createElement('div'); box.className = 'f';
+        box.innerHTML = `<label>${labelText}</label>`;
+        const row = document.createElement('div'); row.style.cssText = 'display:flex;gap:8px;align-items:center';
+        const cp = document.createElement('input'); cp.type = 'color'; cp.value = toHex(value); cp.style.cssText = 'width:44px;height:38px;padding:2px;flex:none;border:1.5px solid #E3E6EA;border-radius:8px';
+        const tx = document.createElement('input'); tx.type = 'text'; tx.value = value;
+        cp.oninput = () => { tx.value = cp.value; onChange(cp.value); };
+        tx.oninput = () => { onChange(tx.value); if (/^#[0-9a-f]{6}$/i.test(tx.value)) cp.value = tx.value; };
+        row.append(cp, tx); box.appendChild(row); return box;
+      }
+      const isLong = opt.long || (typeof value === 'string' && (value.length > 60 || value.includes('<br>')));
+      f.innerHTML = `<label>${labelText}</label>`;
+      const inp = document.createElement(isLong ? 'textarea' : 'input');
+      if (!isLong) inp.type = typeof value === 'number' ? 'number' : 'text';
+      inp.value = value;
+      inp.oninput = () => onChange(typeof value === 'number' ? (parseFloat(inp.value) || 0) : inp.value);
+      f.appendChild(inp);
+      if (typeof value === 'string' && value.includes('<br>')) {
+        const h = document.createElement('span'); h.className = 'hint'; h.textContent = 'Use <br> for a line break.'; f.appendChild(h);
+      }
+      addHint(f, key);
+      return f;
+    }
+    function addHint(f, key) {
+      if (!HINTS[key]) return;
+      const h = document.createElement('span'); h.className = 'hint'; h.textContent = HINTS[key]; f.appendChild(h);
+    }
+
+    function select(labelText, value, options, onChange) {
+      const f = document.createElement('div'); f.className = 'f';
+      f.innerHTML = `<label>${labelText}</label>`;
+      const s = document.createElement('select');
+      s.innerHTML = options.map(o => `<option value="${o}">${MODE_TEXT[o] || pretty(o)}</option>`).join('');
+      if (!options.includes(value)) s.innerHTML += `<option value="${value}">${value}</option>`;
+      s.value = value; s.onchange = () => onChange(s.value);
+      f.appendChild(s); return f;
+    }
+
+    function miniBtn(text, fn, danger) {
+      const b = document.createElement('button'); b.className = 'mini' + (danger ? ' danger' : '');
+      b.type = 'button'; b.textContent = text; b.onclick = fn; return b;
+    }
+    function toHex(v) { return /^#[0-9a-f]{6}$/i.test(v) ? v : '#2E9E33'; }
+
+    /* ============ SAVE / EXPORT ============ */
+
+      async function save(open) {
+
+        /*
+          Prevent accidental double-save while the backend request
+          is being processed.
+        */
+        const buttons =
+          document.querySelectorAll(
+            '.topbar button'
+          );
+
+        buttons.forEach(button => {
+          button.disabled = true;
+        });
+
+
+        try {
+
+          /*
+            Do NOT call applyAutoCalculations() before saving.
+
+            D contains the editable/source values.
+
+            Django is responsible for final calculations:
+              - project duration
+              - current week
+              - days elapsed
+              - days remaining
+              - overall progress
+              - project health
+              - part progress
+              - variance
+              - timeline states
+              - snapshot percentages
+          */
+          const response =
+            await apiFetch(
+              '/api/project-dashboard/k2p/manage/',
+              {
+                method: 'PUT',
+
+                headers: {
+                  'Content-Type':
+                    'application/json'
+                },
+
+                body:
+                  JSON.stringify(D)
+              }
+            );
+
+
+          if (!response.ok) {
+
+            let message =
+              'Unable to save dashboard.';
+
+            try {
+
+              const body =
+                await response.json();
+
+              message =
+                body.message ||
+                body.detail ||
+                JSON.stringify(body);
+
+            } catch (e) { }
+
+            throw new Error(message);
+          }
+
+
+          const result =
+            await response.json();
+
+
+          /*
+            Backend returns the newly calculated live dashboard.
+          */
+          if (result.data) {
+
+            D = merge(
+              structuredClone(DEFAULT_DATA),
+              result.data
+            );
+          }
+
+
+          toast(
+            'Saved successfully to the LIMS backend.'
+          );
+
+
+          if (open) {
+
+            setTimeout(() => {
+
+              window.open(
+                '/api/lims-dashboard/',
+                '_blank'
+              );
+
+            }, 300);
+          }
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          toast(
+            'Save failed: ' +
+            error.message
+          );
+
+
+        } finally {
+
+          buttons.forEach(button => {
+            button.disabled = false;
+          });
+        }
+      }
+
+
+      /*
+        Export now acts only as a backup.
+
+        Exporting JSON does NOT publish/update the dashboard.
+      */
+      function exportJSON() {
+
+        const blob =
+          new Blob(
+            [
+              JSON.stringify(
+                D,
+                null,
+                2
+              )
+            ],
+            {
+              type:
+                'application/json'
+            }
+          );
+
+
+        const a =
+          document.createElement('a');
+
+        a.href =
+          URL.createObjectURL(blob);
+
+        a.download =
+          'k2p-dashboard-backup.json';
+
+        a.click();
+
+
+        URL.revokeObjectURL(
+          a.href
+        );
+
+
+        toast(
+          'Dashboard JSON backup exported.'
+        );
+      }
+
+
+      /*
+        Import only loads JSON into the editor.
+
+        The user must still press Save to publish it.
+      */
+      function importJSON(input) {
+
+        const file =
+          input.files[0];
+
+        if (!file) {
+          return;
+        }
+
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload = function () {
+
+          try {
+
+            const imported =
+              JSON.parse(
+                reader.result
+              );
+
+
+            D = merge(
+              structuredClone(DEFAULT_DATA),
+              imported
+            );
+
+
+            buildEditorForm();
+
+            refreshPreview();
+
+            setupNavigationObserver();
+
+
+            toast(
+              'Imported into the editor. ' +
+              'Press Save to publish it to the backend.'
+            );
+
+
+          } catch (error) {
+
+            console.error(error);
+
+            toast(
+              'That file is not valid dashboard JSON.'
+            );
+          }
+        };
+
+
+        reader.readAsText(file);
+
+        input.value = '';
+      }
+
+
+      /*
+        No localStorage exists anymore.
+
+        Reset means discard unsaved browser changes and fetch
+        the current backend values again.
+      */
+      function resetAll() {
+
+        if (
+          !confirm(
+            'Discard unsaved changes and reload the current backend values?'
+          )
+        ) {
+          return;
+        }
+
+        location.reload();
+      }
+
+    let tt;
+    function toast(msg) {
+      const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on');
+      clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 3000);
+    }
+
+    /* ============ NAVIGATION ============ */
+
+      let navigationObserver = null;
+
+
+      function setupNavigationObserver() {
+
+        if (navigationObserver) {
+          navigationObserver.disconnect();
+        }
+
+
+        const links = [
+          ...nav.querySelectorAll('a')
+        ];
+
+
+        navigationObserver =
+          new IntersectionObserver(
+            entries => {
+
+              entries.forEach(entry => {
+
+                if (!entry.isIntersecting) {
+                  return;
+                }
+
+
+                links.forEach(link => {
+
+                  link.classList.toggle(
+                    'active',
+
+                    link.getAttribute(
+                      'href'
+                    ) ===
+                    '#' +
+                    entry.target.id
+                  );
+
+                });
+
+              });
+
+            },
+
+            {
+              rootMargin:
+                '-70px 0px -70% 0px'
+            }
+          );
+
+
+        SECTIONS.forEach(section => {
+
+          const element =
+            document.getElementById(
+              section.id
+            );
+
+
+          if (element) {
+
+            navigationObserver.observe(
+              element
+            );
+          }
+
+        });
+      }
+
+
+      /* ============ INITIALIZE EDITOR ============ */
+
+      async function initEditor() {
+
+        try {
+
+          /*
+            1. Get live PostgreSQL/backend data.
+          */
+          await loadEditorData();
+
+
+          /*
+            2. Build inputs using that data.
+          */
+          buildEditorForm();
+
+
+          /*
+            3. Show calculation preview.
+          */
+          refreshPreview();
+
+
+          /*
+            4. Enable sidebar highlighting.
+          */
+          setupNavigationObserver();
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          content.innerHTML = `
+      <section class="card">
+
+        <div class="inner">
+
+          <h2>
+            Dashboard could not be loaded
+          </h2>
+
+          <p>
+            ${error.message}
+          </p>
+
+        </div>
+
+      </section>
+    `;
+        }
+      }
+
+
+      /*
+        requireAuth() returns a session only when the user
+        successfully signs in.
+      */
+      if (SESSION) {
+        initEditor();
+      }
+  </script>
+</body>
+
+</html>
